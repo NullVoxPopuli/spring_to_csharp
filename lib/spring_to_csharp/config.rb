@@ -11,7 +11,7 @@ module SpringToCSharp
     end
 
     def method_name
-      config_file[:method_name] || DEFAULT_METHOD_NAME
+      config_file['method_name'] || DEFAULT_METHOD_NAME
     end
 
     def substitutions
