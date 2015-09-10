@@ -7,6 +7,7 @@ module SpringToCSharp
       OBJECTS = 'objects'
       DOCUMENT = 'document'
       TEXT = 'text'
+      COMMENT = 'comment'
     end
   end
 end

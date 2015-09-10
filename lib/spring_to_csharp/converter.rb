@@ -24,7 +24,7 @@ module SpringToCSharp
       result = ''
 
       case tag_name
-      when TagNames::TEXT
+      when TagNames::TEXT, TagNames::COMMENT
         result
       when TagNames::OBJECTS, TagNames::DOCUMENT
         # this is an overall containing element for a spring config file
@@ -34,7 +34,7 @@ module SpringToCSharp
         # set the return type only once
         @return_type = klass unless @return_type.present?
 
-        result << "new #{klass}("
+        result << "\n\tnew #{klass}("
 
         if xml.respond_to?(:children)
           result << array_to_csharp_string(xml.children)
@@ -45,15 +45,16 @@ module SpringToCSharp
         children = xml.children
         type_of_list = get_type_of_list(children)
 
-        result << "new List<#{type_of_list}>(){"
+
+        result << "new List<#{type_of_list}>()\n{"
         result << array_to_csharp_string(children)
-        result << "}"
+        result << "\n}"
       when TagNames::PARAMETER
         name = name_from_node(xml)
 
         # use the named parameter format of
         # parameter: value
-        result << "#{name}: "
+        result << "#{name}: " unless name.blank?
 
         # the parameter will either have a value, or have childern
         if value = value_from_node(xml)
@@ -84,7 +85,7 @@ module SpringToCSharp
         tag_name_of_node(n) == TagNames::OBJECT
       }.first
 
-      klass_from_node(first_object)
+      klass_from_node(first_object) if first_object.present?
     end
 
     def klass_from_node(node)

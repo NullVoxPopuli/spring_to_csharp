@@ -13,5 +13,14 @@
       </list>
     </constructor-arg>
     <constructor-arg name='argument2' value='wat'/>
+    <constructor-arg name='argument3'>
+      <object type="WhyOnEarth">
+        <constructor-arg index="0" value="true"/>
+        <!--comment-->
+        <constructor-arg index="1" value="2"/>
+        <!--blegh-->
+        <constructor-arg index="2" value="0"/>
+      </object>
+    </constructor-arg>
   </object>
 </objects>
