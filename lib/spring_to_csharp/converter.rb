@@ -24,7 +24,7 @@ module SpringToCSharp
       result = ''
 
       case tag_name
-      when TagNames::TEXT, TagNames::COMMENT
+      when TagNames::TEXT, TagNames::COMMENT, TagNames::REF
         result
       when TagNames::OBJECTS, TagNames::DOCUMENT
         # this is an overall containing element for a spring config file

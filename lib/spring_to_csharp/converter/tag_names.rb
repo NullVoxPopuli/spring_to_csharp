@@ -8,6 +8,7 @@ module SpringToCSharp
       DOCUMENT = 'document'
       TEXT = 'text'
       COMMENT = 'comment'
+      REF = 'ref'
     end
   end
 end
