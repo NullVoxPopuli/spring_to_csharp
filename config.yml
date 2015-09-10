@@ -1,0 +1,9 @@
+substitutions:
+  High: 'EngineCheckType.High'
+  Low: 'EngineCheckType.Low'
+  HorsePowerVsSpeed: 'LossUnits.HorsePowerVsSpeed'
+  AcOffFanOff: 'EnginePowerCurveType.AcOffFanOff'
+  AcOnFanOn: 'EnginePowerCurveType.AcOnFanOn'
+  AcOnFanOff: 'EnginePowerCurveType.AcOnFanOff'
+  AcOffFanOn: 'EnginePowerCurveType.AcOffFanOn'
+method_name: 'Parameters'

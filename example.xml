@@ -1,0 +1,17 @@
+<objects xmlns="http://www.springframework.net" default-autowire="constructor">
+
+
+  <object type="Namespace1.SubNamespace.Class, Project.Common" scope="application">
+    <constructor-arg name="argument1">
+      <list>
+        <object type="Namespace1.SubNamespace.SubClass, Project.Common">
+          <constructor-arg name="direction" value="High"/>
+        </object>
+        <object type="Namespace1.SubNamespace.SubClass, Project.Common">
+          <constructor-arg name="direction" value="Low"/>
+        </object>
+      </list>
+    </constructor-arg>
+    <constructor-arg name='argument2' value='wat'/>
+  </object>
+</objects>
