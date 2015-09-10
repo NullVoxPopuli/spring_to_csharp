@@ -15,6 +15,7 @@ module SpringToCSharp
 
   def self.run
     Cli.new
+    true
   end
 
 

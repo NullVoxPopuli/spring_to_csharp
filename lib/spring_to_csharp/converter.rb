@@ -31,9 +31,8 @@ module SpringToCSharp
         array_to_csharp_string(xml.children)
       when TagNames::OBJECT
         klass = klass_from_node(xml)
-
         # set the return type only once
-        return_type = klass unless return_type.present?
+        @return_type = klass unless @return_type.present?
 
         result << "new #{klass}("
 
@@ -46,7 +45,7 @@ module SpringToCSharp
         children = xml.children
         type_of_list = get_type_of_list(children)
 
-        result << "List<#{type_of_list}>(){"
+        result << "new List<#{type_of_list}>(){"
         result << array_to_csharp_string(children)
         result << "}"
       when TagNames::PARAMETER
@@ -67,7 +66,7 @@ module SpringToCSharp
 
           result << value
         elsif xml.respond_to?(:children)
-          array_to_csharp_string(xml.children)
+          result << array_to_csharp_string(xml.children)
         end
       else
         raise "unrecognized tag name: #{tag_name}"

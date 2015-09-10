@@ -11,3 +11,11 @@ Down with XML!
 
 Notes:
  - Unfortunately, this does not figure not add the namespaces of everything (yet). It totally, could, cause spring is as verbose as Charles Dickens. Just load up the resulting file in visual studio to fix all that.
+
+
+## Usage
+
+    $ irb
+    2.2.1 :001 > require 'spring_to_csharp'
+     => true
+    2.2.1 :002 > SpringToCSharp.run
