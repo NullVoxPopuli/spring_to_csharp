@@ -9,6 +9,7 @@ module SpringToCSharp
       TEXT = 'text'
       COMMENT = 'comment'
       REF = 'ref'
+      VALUE = 'value'
     end
   end
 end

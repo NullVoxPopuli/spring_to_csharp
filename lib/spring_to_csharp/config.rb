@@ -3,8 +3,13 @@ module SpringToCSharp
 
     DEFAULT_FILE_NAME = 'config.yml'
     DEFAULT_METHOD_NAME = 'MyMethod'
+    DEFAULT_INDENT = '  '
 
     attr_accessor :input_file_name, :output_file_name, :config_file_name, :options
+
+    def indent
+      DEFAULT_INDENT
+    end
 
     def class_name
       input_file_name.split('.').first

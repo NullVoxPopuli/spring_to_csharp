@@ -19,3 +19,31 @@ Notes:
     2.2.1 :001 > require 'spring_to_csharp'
      => true
     2.2.1 :002 > SpringToCSharp.run
+
+
+## Limitations
+
+### Unknown List Type
+
+When spring doesn't specify the type of a list
+
+```xml
+<list>
+  <value>0</value>
+  <value>1</value>
+  <value>2</value>
+</list>
+```
+Is that a list of doubles, integers, or an unsigned variant?
+
+Currently, the type parameter on the generated `List` constructor is blank. e.g.: `new List<>(){...}`
+
+### Unspecified Enums
+
+When the value of an enum, is just the enum key, and doesn't specify what enum it is from.
+
+```xml
+<constructor-arg name="direction" value="Low"/>
+```
+
+There is no way to know what enum the value `Low` comes from.

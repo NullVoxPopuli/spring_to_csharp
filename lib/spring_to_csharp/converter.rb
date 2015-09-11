@@ -17,27 +17,32 @@ module SpringToCSharp
 
     private
 
-    def to_csharp_string(xml)
+    def to_csharp_string(xml, indentation = 0, from_list = false)
 
       tag_name = tag_name_of_node(xml)
 
       result = ''
+      indentation_text = config.indent * indentation
+
+      beginning_list_indent = from_list ? "\n#{indentation_text}" : "\n"
 
       case tag_name
+      when TagNames::VALUE
+        xml.text
       when TagNames::TEXT, TagNames::COMMENT, TagNames::REF
         result
       when TagNames::OBJECTS, TagNames::DOCUMENT
         # this is an overall containing element for a spring config file
-        array_to_csharp_string(xml.children)
+        array_to_csharp_string(xml.children, indentation + 1)
       when TagNames::OBJECT
         klass = klass_from_node(xml)
         # set the return type only once
         @return_type = klass unless @return_type.present?
 
-        result << "\n\tnew #{klass}("
+        result << "#{beginning_list_indent}new #{klass}("
 
         if xml.respond_to?(:children)
-          result << array_to_csharp_string(xml.children)
+          result << array_to_csharp_string(xml.children, indentation + 1)
         end
 
         result << ')'
@@ -46,15 +51,15 @@ module SpringToCSharp
         type_of_list = get_type_of_list(children)
 
 
-        result << "new List<#{type_of_list}>()\n{"
-        result << array_to_csharp_string(children)
-        result << "\n}"
+        result << "new List<#{type_of_list}>()\n#{indentation_text}{"
+        result << array_to_csharp_string(children, indentation + 1)
+        result << "}"
       when TagNames::PARAMETER
         name = name_from_node(xml)
 
         # use the named parameter format of
         # parameter: value
-        result << "#{name}: " unless name.blank?
+        result << "\n#{indentation_text}#{name}: " unless name.blank?
 
         # the parameter will either have a value, or have childern
         if value = value_from_node(xml)
@@ -74,9 +79,9 @@ module SpringToCSharp
       end
     end
 
-    def array_to_csharp_string(xml_array)
+    def array_to_csharp_string(xml_array, indentation = 0)
       xml_array.map { |node|
-        to_csharp_string(node)
+        to_csharp_string(node, indentation + 1, true)
       }.select { |n| !n.blank? }.join(', ')
     end
 
