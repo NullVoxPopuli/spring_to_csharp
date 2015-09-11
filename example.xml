@@ -15,11 +15,12 @@
     <constructor-arg name='argument2' value='wat'/>
     <constructor-arg name='argument3'>
       <object type="WhyOnEarth">
-        <constructor-arg index="0" value="true"/>
         <!--comment-->
-        <constructor-arg index="1" value="2.123"/>
+        <constructor-arg index="0 " value="true"/>
+        <!-- intentional space here, because people don't know how to follow conventions... -->
+        <constructor-arg index="1" value="2.123 "/>
         <!--blegh-->
-        <constructor-arg index="2" value="0"/>
+        <constructor-arg index="2" value="1303.9000000000001"/>
       </object>
     </constructor-arg>
     <constructor-arg name='basicList'>

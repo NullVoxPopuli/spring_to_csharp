@@ -62,7 +62,7 @@ module SpringToCSharp
         result << "\n#{indentation_text}#{name}: " unless name.blank?
 
         # the parameter will either have a value, or have childern
-        if value = value_from_node(xml)
+        if value = value_from_node(xml).try(:strip)
           # NOTE: if there are multiple parameters, we don't worry about
           #       the trailing comma here. That's the caller's job
 
@@ -75,6 +75,10 @@ module SpringToCSharp
             # float - do nothing
           elsif value.to_i.to_s == value
             # integer - do nothing
+          elsif !value.include?(" ") && value.include?(".")
+            # the other type of float - the rounding error
+            # e.g.: 1303.9000000000001
+            # do nothing
           else
             # not a number, assume string
             # - could be enum...
