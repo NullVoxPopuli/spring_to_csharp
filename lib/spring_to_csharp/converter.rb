@@ -71,7 +71,11 @@ module SpringToCSharp
             value = substitution_hash[value]
           elsif ["true", "false"].include?(value)
             # do nothing - value is where it needs to be
-          elsif value.to_i.to_s != value
+          elsif value.to_f.to_s == value
+            # float - do nothing
+          elsif value.to_i.to_s == value
+            # integer - do nothing
+          else
             # not a number, assume string
             # - could be enum...
             value = "\"#{value}\""
