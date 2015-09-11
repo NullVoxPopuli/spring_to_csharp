@@ -29,7 +29,7 @@ module SpringToCSharp
       case tag_name
       when TagNames::VALUE
         xml.text
-      when TagNames::TEXT, TagNames::COMMENT, TagNames::REF
+      when TagNames::TEXT, TagNames::COMMENT, TagNames::REF, TagNames::NULL
         result
       when TagNames::OBJECTS, TagNames::DOCUMENT
         # this is an overall containing element for a spring config file
@@ -66,8 +66,19 @@ module SpringToCSharp
           # NOTE: if there are multiple parameters, we don't worry about
           #       the trailing comma here. That's the caller's job
 
+          # transform value if needed
           if substitution_hash.has_key?(value)
             value = substitution_hash[value]
+          elsif ["true", "false"].include?(value)
+            # do nothing - value is where it needs to be
+          elsif value.to_i.to_s != value
+            # not a number, assume string
+            # - could be enum...
+            value = "\"#{value}\""
+          end
+
+          if value.blank?
+            value = 'null'
           end
 
           result << value

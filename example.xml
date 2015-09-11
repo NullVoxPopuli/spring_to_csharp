@@ -29,5 +29,6 @@
         <value>2</value>
       </list>
     </constructor-arg>
+    <constructor-arg name='nullValue' value=''/>
   </object>
 </objects>

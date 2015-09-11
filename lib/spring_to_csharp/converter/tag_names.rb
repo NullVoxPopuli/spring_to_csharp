@@ -10,6 +10,7 @@ module SpringToCSharp
       COMMENT = 'comment'
       REF = 'ref'
       VALUE = 'value'
+      NULL = 'null'
     end
   end
 end
